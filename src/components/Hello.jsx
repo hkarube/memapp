@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     backgroundColor: 'blue',
     fontSize: 40,
-    fontWeight: 'bolt',
+    fontWeight: 'bold',
     padding: 16,
   },
 });
