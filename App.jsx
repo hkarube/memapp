@@ -8,7 +8,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Hello>world</Hello>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>pen up App.js to start working on your app!</Text>
       {/* eslint-disable */}
       <StatusBar style="auto" />
     </View>
