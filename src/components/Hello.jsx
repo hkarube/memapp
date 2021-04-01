@@ -1,24 +1,31 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { string } from 'prop-types';
+import { string, bool, shape } from 'prop-types';
 
 function Hello(props) {
-  const { children } = props;
+  const { children, bang } = props;
   return (
     <View>
-      <Text tyle={styles.Text}>
-          hello {children}
-        </Text>
+      <Text style={[styles.text, style]}>
+        {`hello ${children}${bang ? '!' : ''}` }
+      </Text>
     </View>
   );
 }
 
 Hello.propTypes = {
-  children: string.isReqired,
+  children: string.isRequired,
+  bang: bool,
+  style: shape(),
+};
+
+Hello.defaultProps = {
+  bang: false,
+  style: null,
 };
 
 const styles = StyleSheet.create({
-  Text: {
+  text: {
     color: '#ffffff',
     backgroundColor: 'blue',
     fontSize: 40,

@@ -7,7 +7,7 @@ import Hello from './src/components/Hello';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Hello>world</Hello>
+      <Hello bang>world</Hello>
       <Text>pen up App.js to start working on your app!</Text>
       {/* eslint-disable */}
       <StatusBar style="auto" />
