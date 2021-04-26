@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
   },
   appberInner: {
     backgroundColor: 'gray',
+    alighItem: 'center',
   },
   appberRight: {
     position: 'absolute',
