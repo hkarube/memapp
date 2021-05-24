@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet } from 'react-native';
-
+import {
+  View, ScrollView, Text, StyleSheet,
+} from 'react-native';
 import AppBar from '../components/AppBar';
 import CircleBotton from '../components/CircleButton';
 
@@ -17,7 +18,7 @@ export default function MemoDetailScreen() {
           買い物詳細
         </Text>
       </ScrollView>
-      <CircleBotton style={{ top: 160, bottom: 'auto' }}>+</CircleBotton>
+      <CircleBotton style={{ top: 160, bottom: 'auto' }} name="edit-2" />
     </View>
   );
 }
