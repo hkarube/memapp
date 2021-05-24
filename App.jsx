@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
 // import MemolistScreen from './src/screens/MemoListScreen';
-// import MemoEditScreen from './src/screens/MemoEditScreen';
+import MemoEditScreen from './src/screens/MemoEditScreen';
 import MemoCreateScreen from './src/screens/MemoCreateScreen';
 
 const firebaseConfig = {
@@ -19,6 +19,6 @@ if (firebase.apps.length === 0) {
 
 export default function App() {
   return (
-    <MemoCreateScreen />
+    <MemoEditScreen />
   );
 }
