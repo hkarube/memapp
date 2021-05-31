@@ -1,23 +1,39 @@
 import React from 'react';
 import {
-  View, Text, TextInput, StyleSheet,
+  View, Text, TextInput, StyleSheet, TouchableOpacity,
 } from 'react-native';
 
-import AppBar from '../components/AppBar';
 import Button from '../components/Button';
 
-export default function LogInScreen() {
+export default function LogInScreen(props) {
+  const { navigation } = props;
   return (
     <View style={styles.container}>
-      <AppBar />
       <View style={styles.inner}>
         <Text style={styles.titl}> log In</Text>
         <TextInput style={styles.input} value="Email Add" />
         <TextInput style={styles.input} value="Password" />
-        <Button labl="submit" />
+        <Button
+          labl="submit"
+          onPress={() => {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Memolist' }],
+            });
+          }}
+        />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Not regster</Text>
-          <Text style={styles.footerLink}> Sign up here!</Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.reset({
+                index: 0,
+                routes: [{ name: 'SighUp' }],
+              });
+            }}
+          >
+            <Text style={styles.footerLink}> Sign up here!</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
