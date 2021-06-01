@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View, Text, TextInput, StyleSheet, TouchableOpacity,
 } from 'react-native';
@@ -7,12 +7,32 @@ import Button from '../components/Button';
 
 export default function LogInScreen(props) {
   const { navigation } = props;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
         <Text style={styles.titl}> log In</Text>
-        <TextInput style={styles.input} value="Email Add" />
-        <TextInput style={styles.input} value="Password" />
+        <TextInput
+          style={styles.input}
+          value={email}
+          onChangeText={(text) => { setEmail(text); }}
+          autoCapitalize="none" // 先頭が小文字になるように設定
+          keyboardType="email-address" // キーボードに＠を出します
+          placeholder="Email Address" // 未入力で表示する文字列
+          textContentType="emailAddress" // キーチェーンから取得できる
+        />
+        <TextInput
+          style={styles.input}
+          value={password}
+          // アローファンクション =>
+          onChangeText={(text) => { setPassword(text); }}
+          autoCapitalize="none" // 先頭が小文字になるように設定
+          placeholder="Password"
+          secureTextEntry
+          textContentType="password" // キーチェーンから取得できる
+        />
         <Button
           labl="submit"
           onPress={() => {

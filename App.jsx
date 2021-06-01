@@ -55,7 +55,7 @@ export default function App() {
 
         <Stack.Screen
           name="SighUp"
-          component={LogInScreen}
+          component={SighUpScreen}
           options={{
             cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
           }}
