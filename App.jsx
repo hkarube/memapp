@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
 import firebase from 'firebase';
+
 import MemolistScreen from './src/screens/MemoListScreen';
 import MemoDetailScreen from './src/screens/MemoDetailScreen';
 import MemoEditScreen from './src/screens/MemoEditScreen';
@@ -10,17 +11,11 @@ import MemoCreateScreen from './src/screens/MemoCreateScreen';
 import LogInScreen from './src/screens/LogInScreen';
 import SighUpScreen from './src/screens/SighUpScreen';
 
+import { firebaseConfig } from './env';
+
 const Stack = createStackNavigator();
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyDY-ixzRax3CWNaz7_ULdmDfhSpc5bwQb0',
-  authDomain: 'memoapp-92e74.firebaseapp.com',
-  projectId: 'memoapp-92e74',
-  storageBucket: 'memoapp-92e74.appspot.com',
-  messagingSenderId: '787235384712',
-  appId: '1:787235384712:web:4c79594bc8e576361f5e3d',
-};
-
+// DB初期化
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
@@ -29,7 +24,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="SighUp"
+        initialRouteName="LogIn"
         screenOptions={{
           headerStyle: { backgroundColor: '#467FD3' },
           headerTitleStyle: { color: '#ffffff' },

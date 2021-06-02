@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  View, Text, TextInput, StyleSheet, TouchableOpacity,
+  View, Text, TextInput, StyleSheet, TouchableOpacity, Alert,
 } from 'react-native';
+
+import firebase from 'firebase';
 
 import Button from '../components/Button';
 
@@ -9,6 +11,34 @@ export default function LogInScreen(props) {
   const { navigation } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    // ユーザーの状態を監視
+    firebase.auth().onAuthStateChanged((user) => {
+      // ログインしていればメモリストを表示
+      if (user) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Memolist' }],
+        });
+      }
+    });
+  });
+
+  function handlePress() {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        console.log(user.uid);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Memolist' }],
+        });
+      })
+      .catch((error) => {
+        Alert.alert(error.code, error.message);
+      });
+  }
 
   return (
     <View style={styles.container}>
@@ -35,12 +65,7 @@ export default function LogInScreen(props) {
         />
         <Button
           labl="submit"
-          onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes: [{ name: 'Memolist' }],
-            });
-          }}
+          onPress={handlePress}
         />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Not regster</Text>

@@ -3,12 +3,29 @@ import {
   View, Text, TextInput, StyleSheet, TouchableOpacity,
 } from 'react-native';
 
+import firebase from 'firebase';
+
 import Button from '../components/Button';
 
 export default function LogInScreen(props) {
   const { navigation } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  function handlePress() {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        console.log(user.uid);
+      })
+      .catch((error) => {
+        console.log(error.code, error.message);
+      });
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Memolist' }],
+    });
+  }
 
   return (
     <View style={styles.container}>
@@ -35,12 +52,7 @@ export default function LogInScreen(props) {
         />
         <Button
           labl="submit"
-          onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes: [{ name: 'Memolist' }],
-            });
-          }}
+          onPress={handlePress}
         />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already registered?</Text>
