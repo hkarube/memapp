@@ -14,7 +14,7 @@ export default function LogInScreen(props) {
 
   useEffect(() => {
     // ユーザーの状態を監視
-    firebase.auth().onAuthStateChanged((user) => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       // ログインしていればメモリストを表示
       if (user) {
         navigation.reset({
@@ -23,8 +23,10 @@ export default function LogInScreen(props) {
         });
       }
     });
-  });
-
+    return unsubscribe; // メモリストをアンマウント
+  }, []);
+  // []はコンポーネントがマウントされた時一度だけcallbackが実行される
+  // 例えばバックボタンでメモリストに戻ったときは実行されません。
   function handlePress() {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
