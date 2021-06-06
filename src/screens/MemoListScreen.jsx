@@ -42,7 +42,7 @@ export default function MemoListScreen(props) {
         Alert.alert('データの読み込みに失敗しました');
       });
     }
-    return unsubscribe;
+    return unsubscribe; // 監視の中止
   }, []);
   return (
     <View style={styles.container}>
