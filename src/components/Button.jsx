@@ -3,12 +3,12 @@ import {
   TouchableOpacity, Text, StyleSheet,
 } from 'react-native';
 
-import { func, string } from 'prop-types';
+import { func, string, shape } from 'prop-types';
 
 export default function button(props) {
-  const { labl, onPress } = props;
+  const { labl, onPress, style } = props;
   return (
-    <TouchableOpacity style={styles.bottonContainer} onPress={onPress}>
+    <TouchableOpacity style={[styles.bottonContainer, style]} onPress={onPress}>
       <Text style={styles.bottonLabel}>{labl}</Text>
     </TouchableOpacity>
   );
@@ -17,18 +17,17 @@ export default function button(props) {
 button.propTypes = {
   labl: string.isRequired,
   onPress: func,
+  style: shape(),
 };
 
 button.defaultProps = {
   onPress: null,
+  style: null,
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   bottonContainer: {
-    backgroundColor: '#467Fd3',
+    backgroundColor: '#467FD3',
     borderRadius: 4,
     alignSelf: 'flex-start',
     marginBottom: 24,
@@ -37,8 +36,8 @@ const styles = StyleSheet.create({
   bottonLabel: {
     fontSize: 16,
     lineHeight: 32,
-    paddingHorizontal: 32,
     paddingVertical: 8,
+    paddingHorizontal: 32,
     color: '#ffffff',
   },
 });
