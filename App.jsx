@@ -1,4 +1,5 @@
 import React from 'react';
+import { LogBox } from 'react-native'; // androidの警告（setting a timer）の無視
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
@@ -21,6 +22,7 @@ if (firebase.apps.length === 0) {
 }
 
 const Stack = createStackNavigator();
+LogBox.ignoreLogs(['Setting a timer']); // androidの警告
 
 export default function App() {
   return (

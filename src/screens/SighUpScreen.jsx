@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import {
-  View, Text, TextInput, StyleSheet, TouchableOpacity,
+  View, Text, TextInput, StyleSheet, TouchableOpacity, Alert,
 } from 'react-native';
 
 import firebase from 'firebase';
 
 import Button from '../components/Button';
+import { translateErrors } from '../utils'; // エラーメッセージ
 
 export default function LogInScreen(props) {
   const { navigation } = props;
@@ -17,14 +18,15 @@ export default function LogInScreen(props) {
       .then((userCredential) => {
         const { user } = userCredential;
         console.log(user.uid);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Memolist' }],
+        });
       })
       .catch((error) => {
-        console.log(error.code, error.message);
+        const errorMsg = translateErrors(error.code);
+        Alert.alert(errorMsg.title, errorMsg.description);
       });
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Memolist' }],
-    });
   }
 
   return (
