@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import {
   View, Text, TextInput, StyleSheet, TouchableOpacity, Alert,
 } from 'react-native';
-
 import firebase from 'firebase';
 
 import Button from '../components/Button';
 import Loading from '../components/Loading';
 import { translateErrors } from '../utils';
+import CancelLogIn from '../components/CancelLogIn';
 
 // import format from 'date-fns/esm/locale/fr/index.js';
 
@@ -18,20 +18,11 @@ export default function LogInScreen(props) {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    // ユーザーの状態を監視
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      // ログインしていればメモリストを表示
-      if (user) {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'Memolist' }],
-        });
-      } else {
-        setLoading(false);
-      }
+    navigation.setOptions({
+      headerRight: () => <CancelLogIn />,
     });
-    return unsubscribe; // メモリストをアンマウント
   }, []);
+
   // []はコンポーネントがマウントされた時一度だけcallbackが実行される
   // 例えばバックボタンでメモリストに戻ったときは実行されません。
   function handlePress() {
